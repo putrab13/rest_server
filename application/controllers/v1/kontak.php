@@ -15,7 +15,18 @@ class Kontak extends REST_Controller {
     }
 
     //Menampilkan data kontak
-    function index_get() {
+   
+     function index_get() {
+        $id = $this->get('id');
+        if ($id == '') {
+            $kontak = $this->db->get('telepon')->result();
+        } else {
+            $this->db->where('id', $id);
+            $kontak = $this->db->get('telepon')->result();
+        }
+        $this->response($kontak, 200);
+    }
+    function getbcd_get() {
         $id = $this->get('id');
         if ($id == '') {
             $kontak = $this->db->get('telepon')->result();
